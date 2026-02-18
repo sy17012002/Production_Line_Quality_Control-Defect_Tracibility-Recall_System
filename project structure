@@ -1,0 +1,24 @@
+manufacturing-qc/
+│
+├── server.js
+├── db.js
+├── package.json
+│
+├── routes/
+│     ├── auth.js
+│     ├── production.js
+│     ├── qc.js
+│     ├── recall.js
+│     ├── dashboard.js
+│
+├── middleware/
+│     ├── authMiddleware.js
+│
+├── services/
+│     ├── defectService.js
+│     ├── recallService.js
+│
+├── utils/
+│     ├── hashUtil.js
+│
+└── uploads/
