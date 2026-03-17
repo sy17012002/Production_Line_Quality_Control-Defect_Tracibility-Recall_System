@@ -1,60 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operator Portal - Log Production</title>
+    <title>Operator Portal</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1, h2 { color: #333; }
-        .form-section { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        input, select, button { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; box-sizing: border-box; }
-        button { background-color: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; font-size: 16px; }
-        button:hover { background-color: #0056b3; }
-        .logout-btn { background-color: #dc3545; width: auto; float: right; font-size: 14px; padding: 8px 15px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .dashboard-container {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #764ba2;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #5a378c;
+        }
+
+        .toggle-text {
+            margin-top: 1rem;
+        }
+
+        .toggle-text span {
+            color: #764ba2;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
-
 </head>
+
 <body>
-
-    <div class="container">
-        <button class="logout-btn" onclick="logout()">Logout</button>
-        <h1>Operator Portal</h1>
-        <p>Log a new production run below. This will generate a unique Batch ID.</p>
-
-        <div class="form-section">
-            <form id="batchForm" action="/" method="POST">
-                <label>Product SKU (What are you making?)</label>
-                <input type="text" id="product_sku" placeholder="e.g., MOT-12V" required>
-
-                <label>Machine ID (Which machine are you using?)</label>
-                <input type="text" id="machine_id" placeholder="e.g., MCH-001" required>
-
-                <label>Batch ID</label>
-                <input type="text" id="batch_id" placeholder="e.g., BCH-001" required>
-
-                <label>Product ID</label>
-                <input type="text" id="product_id" placeholder="e.g., PROD-001" required>
-
-                <label>Current Shift</label>
+    <div class="dashboard-container">
+        <div id="operator-form" class="form-box">
+            <h2>Operator Portal</h2>
+            <p>Log a new production run below</p>
+            <form action="/" method="POST">
+                <input type="text" name="batch_id" placeholder="Enter defective Batch ID" required>
+                <input type="text" name="product_id" placeholder="Enter defective Machine ID" required>
+                <input type="text" name="machine_id" placeholder="Enter defective Product ID" required>
                 <select id="shift" required>
                     <option value="">-- Select Shift --</option>
                     <option value="Morning">Morning (06:00 - 14:00)</option>
                     <option value="Evening">Evening (14:00 - 22:00)</option>
                     <option value="Night">Night (22:00 - 06:00)</option>
                 </select>
-
-                <label>Quantity Produced</label>
-                <input type="number" id="quantity" placeholder="e.g., 100" required>
-
-                <label>Production Date</label>
-                <input type="date" id="production_date" required>
-
-                <button type="submit">Log Production Batch</button>
+                <input type="number" name="quantity" placeholder="Enter quantity produced" required>
+                <input type="date" name="production_date" placeholder="Production Date" required>
+                <button type="submit" class="btn">Log Production Batch</button>
             </form>
+
         </div>
+
     </div>
 
 </body>
+
 </html>
