@@ -29,15 +29,15 @@ router.post("/machines", async (req, res) => {
 // Add new product
 router.post("/products", async (req, res) => {
   try {
-    const { product_id, product_name, sku } = req.body;
+    const { product_id, product_name, product_sku } = req.body;
 
-    if (!product_id || !product_name || !sku) {
+    if (!product_id || !product_name || !product_sku) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
     const { data, error } = await supabase
       .from("products")
-      .insert([{ product_id, product_name, sku }])
+      .insert([{ product_id, product_name, product_sku }])
       .select();
 
     if (error) throw error;

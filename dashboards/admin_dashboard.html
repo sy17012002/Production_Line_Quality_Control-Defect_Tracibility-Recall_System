@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,11 +94,11 @@
         <div id="admin-panel-machine" class="form-box">
             <h2>Admin Control Panel</h2>
             <p>Add new machine</p>
-            <form action="/" method="POST">
-                <input type="text" name="machine_id" placeholder="Machine ID" required>
-                <input type="text" name="machine_name" placeholder="Machine Name" required>
-                <input type="text" name="machine_type" placeholder="Machine Type" required>
-                <input type="date" name="last_maintenance" placeholder="Last Maintenance Date" required>
+            <form>
+                <input type="number" name="machine_id" id="machine-id" placeholder="Machine ID" required>
+                <input type="text" name="machine_name" id="machine-name" placeholder="Machine Name" required>
+                <input type="text" name="machine_type" id="machine-type" placeholder="Machine Type" required>
+                <input type="date" name="last_maintenance" id="last-maintenance" placeholder="Last Maintenance Date" required>
                 <button type="submit" class="btn">Add Machine</button>
             </form>
 
@@ -108,9 +109,9 @@
             <h2>Admin Control Panel</h2>
             <p>Add new product</p>
             <form action="/" method="POST">
-                <input type="text" name="product_id" placeholder="Product ID" required>
-                <input type="text" name="product_name" placeholder="Product Name" required>
-                <input type="text" name="product_sku" placeholder="Product SKU" required>
+                <input type="number" name="product_id" id="product-id" placeholder="Product ID" required>
+                <input type="text" name="product_name" id="product-name" placeholder="Product Name" required>
+                <input type="text" name="product_sku" id="product-sku" placeholder="Product SKU" required>
                 <button type="submit" class="btn">Add Product</button>
             </form>
             <p class="toggle-text">Add new machine <span onclick="toggleForm()">Machine</span></p>
@@ -125,8 +126,58 @@
             machineForm.classList.toggle('hidden');
             productForm.classList.toggle('hidden');
         }
+
+        // machine form sumbission handler
+        const machineForm = document.querySelector('#admin-panel-machine form');
+        machineForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const machine_id = document.getElementById('machine-id').value;
+            const machine_name = document.getElementById('machine-name').value;
+            const machine_type = document.getElementById('machine-type').value;
+            const last_maintenance = document.getElementById('last-maintenance').value;
+
+            const res = await fetch('/api/admin/machines', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ machine_id, machine_name, machine_type, last_maintenance })
+            });
+
+            const data = await res.json();
+
+            if (data.redirect) {
+                // window.location.href = `/${data.user.role}/dashboard`;
+                alert('Machine added successfully');
+            } else {
+                alert(data.message || 'Machine addition failed');
+            }
+        });
+
+
+        // product form submission handler
+        const productForm = document.querySelector('#admin-panel-product form');
+        productForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const product_id = document.getElementById('product-id').value;
+            const product_name = document.getElementById('product-name').value;
+            const product_sku = document.getElementById('product-sku').value;
+
+            const res = await fetch('/api/admin/products', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ product_id, product_name, product_sku })
+            });
+
+            const data = await res.json();
+
+            if (data.redirect) {
+                // window.location.href = `/${data.user.role}/dashboard`;
+                alert('Product added successfully');
+            } else {
+                alert(data.message || 'Product addition failed');
+            }
+        });
     </script>
-   
+
 </body>
 
 </html>
