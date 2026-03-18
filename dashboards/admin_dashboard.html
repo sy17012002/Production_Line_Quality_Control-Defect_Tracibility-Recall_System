@@ -144,12 +144,8 @@
 
             const data = await res.json();
 
-            if (data.redirect) {
-                // window.location.href = `/${data.user.role}/dashboard`;
-                alert('Machine added successfully');
-            } else {
-                alert(data.message || 'Machine addition failed');
-            }
+            alert(data.message || 'Machine addition failed');
+            
         });
 
 
@@ -169,12 +165,8 @@
 
             const data = await res.json();
 
-            if (data.redirect) {
-                // window.location.href = `/${data.user.role}/dashboard`;
-                alert('Product added successfully');
-            } else {
-                alert(data.message || 'Product addition failed');
-            }
+            alert(data.message || 'Product addition failed');
+
         });
     </script>
 

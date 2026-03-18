@@ -134,13 +134,9 @@
             });
 
             const data = await res.json();
-
-            if (data.redirect) {
-                // window.location.href = `/${data.user.role}/dashboard`;
-                alert('Operator entry added successfully');
-            } else {
-                alert(data.message || 'Operator entry failed');
-            }
+            
+            alert(data.message || 'Operator entry failed');
+            
         });
     </script>
 
