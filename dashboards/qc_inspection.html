@@ -141,13 +141,9 @@
             });
 
             const data = await res.json();
-
-            if (data.redirect) {
-                // window.location.href = `/${data.user.role}/dashboard`;
-                alert('QC inspection submitted successfully');
-            } else {
-                alert(data.message || 'QC inspection failed');
-            }
+            
+            alert(data.message || 'QC inspection failed');
+            
         });
     </script>
 
